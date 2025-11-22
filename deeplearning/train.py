@@ -52,6 +52,21 @@ class TwoTower(pl.LightningModule):
         self.log("train_loss", loss)
         return loss
 
+    def test_step(self, batch, batch_idx):
+        seq, target = batch
+        logits = self(seq, target)
+        labels = torch.arange(logits.size(0), device=logits.device)
+        loss = F.cross_entropy(logits, labels)
+
+        # top-1 正确率，因为目标必须是对应行的物品
+        preds = torch.argmax(logits, dim=1)
+        acc = (preds == labels).float().mean()
+
+        self.log("test_loss", loss, prog_bar=True)
+        self.log("test_acc", acc, prog_bar=True)
+
+        return loss
+
     def configure_optimizers(self):
         return torch.optim.AdamW(self.parameters(), lr=self.lr)
 
