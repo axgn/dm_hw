@@ -1,5 +1,0 @@
-embed_dim: 64
-lr: 0.001
-num_items: 12909
-topk: 10
-weight_decay: 1.0e-05
