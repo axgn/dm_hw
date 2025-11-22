@@ -113,7 +113,12 @@ if __name__ == "__main__":
         ]
     )
     max_seq_len = 50
-    model = TwoTower(num_items=all_targets.max(), max_seq_len=max_seq_len)
-    trainer = pl.Trainer(max_epochs=10, accelerator="auto", devices="auto")
+    num_items = int(all_targets.max().item())
+    model = TwoTower(num_items=num_items, max_seq_len=max_seq_len)
+    trainer = pl.Trainer( max_epochs=10,
+    accelerator="gpu",
+    devices=1,
+    precision="16-mixed",
+    log_every_n_steps=10,)
     trainer.fit(model, datamodule=dm)
     trainer.test(model, datamodule=dm)

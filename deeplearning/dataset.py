@@ -109,10 +109,12 @@ def load_tensor_dataset(data_dir: Path, batch_size: int = 1024):
 # 使用示例
 # ----------------------
 if __name__ == "__main__":
-    ratings_csv = Path("datasets/ml-25m/ratings.csv")
-    out_dir = Path("datasets/ml-25m/preprocessed_tensor")
+    # Resolve relative to repo root so running from any cwd works.
+    repo_root = Path(__file__).resolve().parents[1]
+    ratings_csv = repo_root / "datasets/ml-25m/ratings.csv"
+    out_dir = repo_root / "datasets/ml-25m/preprocessed_tensor"
     max_seq_len = 50
-
+    print("准备处理 MovieLens 25M 数据集...")
     num_users, num_items = preprocess_movielens_tensors(ratings_csv, out_dir, max_users=50000)
     print(f"num_users={num_users}, num_items={num_items}")
 
