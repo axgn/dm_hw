@@ -12,3 +12,4 @@ wheels/
 .vscode/
 .DS_Store
 lightning_logs/
+models/

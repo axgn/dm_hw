@@ -65,6 +65,14 @@ class TwoTower(pl.LightningModule):
         self.log("test_loss", loss, prog_bar=True)
         self.log("test_acc", acc, prog_bar=True)
 
+        scores = logits
+        # 每行按从大到小排序
+
+        topk = torch.topk(scores, k=10, dim=1).indices
+        hits = (topk == labels.unsqueeze(1)).any(dim=1).float()
+        recall10 = hits.mean()
+        self.log("recall@10", recall10, prog_bar=True)
+
         return loss
 
     def configure_optimizers(self):
