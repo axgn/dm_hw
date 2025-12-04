@@ -14,5 +14,6 @@ dependencies = [
     "torch; sys_platform == 'darwin'",
     "torch @ https://download.pytorch.org/whl/cu126/torch-2.9.0%2Bcu126-cp313-cp313-win_amd64.whl#sha256=651b1fad5f3eacd2c2fbae76b526cd75758e9839a04ab4fb48e78ebc51fb5e1a; sys_platform == 'win32'",
     "torchmetrics>=1.0.3",
+    "hnswlib>=0.8.0",
 ]
 
