@@ -16,4 +16,3 @@ dependencies = [
     "torchmetrics>=1.0.3",
     "hnswlib>=0.8.0",
 ]
-
